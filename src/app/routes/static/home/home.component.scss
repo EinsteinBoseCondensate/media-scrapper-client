@@ -1,0 +1,112 @@
+:host {
+    height: -webkit-fill-available !important;
+}
+
+#home-master {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.top-body {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    height: fit-content;
+    padding: 1rem;
+    opacity: 0.8;
+
+}
+.add-to-my-videos-wrapper{
+    padding: 1rem 0 0 min(5rem,2%);
+}
+.search-wrapper {
+    display: flex;
+    width: min(28.5rem, calc(100vw + 5.5rem));
+    flex-wrap: wrap;
+}
+
+mat-form-field[search-input] {
+    width: min(20rem, 100vw);
+    margin: 0.5rem 0.5rem 0 0;
+}
+
+.video-player-wrapper,
+.videos-list-wrapper {    
+    display: flex;
+    justify-content: space-around;
+}
+
+.video-player-wrapper>iframe {
+    --iframe-width: min(100vw, 2200px);
+    height: calc(var(--iframe-width) * 0.5625);
+    width: var(--iframe-width);
+}
+
+.videos-list {
+    padding: 0 min(5rem, 2%);
+    max-width: 1000px;
+}
+
+.video {
+    list-style: none;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #cfcfcf;
+}
+
+.thumbnail {
+    height: 5rem;
+    width: 9rem;
+    background-size: contain !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.duration {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    background: black;
+    margin-left: auto;
+    font-weight: bold !important;
+    padding: 0.1rem;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.3rem 0 0 0.6rem;
+}
+
+@mixin home-theme($theme, $is-dark-theme) {
+
+    .top-body,
+    .mat-form-field-infix input,
+    mat-label {
+        @if $is-dark-theme {
+            color: black !important;
+            --colorDatePicker: white;
+            --backgroundDatePicker: #303030;
+        }
+
+        @else {
+            color: white !important;
+            --colorDatePicker: #303030;
+            --backgroundDatePicker: white;
+        }
+    }
+
+    .top-body,
+    .mat-form-field-infix input,
+    mat-label {
+        background-color: mat-color(map-get($theme, primary));
+    }
+
+    fa-icon svg path {
+        fill: mat-color(map-get($theme, primary));
+    }
+}

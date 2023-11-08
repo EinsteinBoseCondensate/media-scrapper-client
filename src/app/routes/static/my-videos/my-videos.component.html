@@ -1,0 +1,40 @@
+<section id="my-videos-master">
+   
+    <div class="selected-video-container" *ngIf="selectedVideo">
+        <div class="video-player-wrapper">
+            <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+        </div>        
+        <div class="add-to-my-videos-wrapper">
+            <app-fa-icon-button icon="thumbs-up" sizeClass="size-2" (click)="removeVideo(selectedVideo, selectedVideoIndex)"></app-fa-icon-button>
+        </div>
+    </div>
+    <div class="videos-list-wrapper">
+        <ul class="videos-list" *ngIf="myVideos?.length;else not_any_videos">
+            <li class="video" *ngFor="let video of myVideos;let videoIndex = index;" (click)="videoSelected(video, videoIndex)">
+                <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
+                </ng-container>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<ng-template #videoItem let-video="video">
+
+    <div class="row">
+        <div class="thumbnail" [style.background]="'url(' + video.thumbnailUrl + ')'">
+            <div class="duration"> {{ video.durationFormatted }} </div>
+        </div>
+        <div class="details">
+            <div class="title"> {{ video.title }} </div>
+            <div class="channel-title"> {{ video.channelTitle }} </div>
+        </div>
+    </div>
+
+</ng-template>
+
+<ng-template #not_any_videos>
+    <div class="no-videos-node">
+        It seems you have no videos...
+    </div>
+
+</ng-template>

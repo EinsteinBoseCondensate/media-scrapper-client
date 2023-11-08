@@ -1,0 +1,10 @@
+{
+  "domain": "dev-cocoe0b45mvat4al.us.auth0.com",
+  "clientId": "RXOCVB8WAd2loDfcuUy5Zl0v3DL06yuw",
+  "authorizationParams": {
+    "audience": "dec79fa0374532ebe5a5ebcb9f36e7272f2c257a"
+  },
+  "apiUri": "https://localhost:7261",
+  "appUri": "https://media-scrapper.local.com:4200",
+  "errorPath": "/error"
+}

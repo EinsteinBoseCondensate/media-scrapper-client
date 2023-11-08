@@ -1,0 +1,28 @@
+<div class="toolbar" role="banner">
+  <div class="column-inline-flex-start">
+    <div class="row-inline-flex-start" *ngIf="auth0Service.isAuthenticated$ | async;else not_authenticated">
+      <div class="row-inline-flex-start app-actions" (click)="logout()">
+        <app-fa-icon-button title="Logout" icon="right-from-bracket" sizeClass="size-2"></app-fa-icon-button>
+        <span class="column-inline-flex-end center default-pointer">Logout</span>
+      </div>
+      <div class="routes-wrapper">
+        <a routerLink="my-videos" class="app-route">My videos</a>
+      </div>
+      <div class="routes-wrapper">
+        <a routerLink="" class="app-route">Search videos</a>
+      </div>
+    </div>
+  </div>
+  <div class="column-inline-flex-end app-action">
+    <app-theme-chooser></app-theme-chooser>
+  </div>
+</div>
+
+<ng-template #not_authenticated>
+  <div class="row-inline-flex-start">
+    <div class="row-inline-flex-start app-action" (click)="login()">
+      <app-fa-icon-button title="Login" icon="right-to-bracket" sizeClass="size-2"></app-fa-icon-button>
+      <span class="column-inline-flex-end center default-pointer">Login</span>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,56 @@
+@use "@angular/material" as mat;
+@import "./components-themes.scss";
+
+@include mat-core();
+
+
+//default-theme
+$primary: mat.define-palette($mat-indigo);
+$accent: mat.define-palette($mat-pink, A200, A100, A400);
+$warn: mat.define-palette($mat-red);
+$theme: mat.define-light-theme((
+    color: (
+        primary: $primary,
+        accent: $accent,
+        warn: $warn
+    ),
+    density: 0,
+    typography: mat.define-typography-config()
+));
+
+.app-default-theme {
+
+    @include mat.all-component-themes($theme);
+    @include components-theme($theme, false);
+    
+}
+
+
+//dark-theme
+$dark-primary: mat.define-palette($mat-pink);
+$dark-accent: mat.define-palette($mat-amber, A400, A100, A700);
+$dark-warn: mat.define-palette($mat-red);
+$dark-theme: mat.define-dark-theme((
+    color: (
+        primary: $dark-primary,
+        accent: $dark-accent,
+        warn: $dark-warn
+    ),
+    density: 0,
+    typography: mat.define-typography-config()
+));
+
+.app-dark-theme {
+
+    @include mat.all-component-themes($dark-theme);
+    @include components-theme($dark-theme, true);
+
+}
+
+/*SWEETALERT SPECIFIC BEHAVIOUR, IT'S ON A SEPARATE CONTAINER*/
+body.app-default-theme .swal2-container{
+    @include sweet-alert-theme($theme, false);
+}
+body.app-dark-theme .swal2-container{
+    @include sweet-alert-theme($dark-theme, true);
+}

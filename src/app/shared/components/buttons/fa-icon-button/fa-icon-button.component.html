@@ -1,0 +1,4 @@
+<div [class]="['button-wrapper', sizeClass]" [title]="title">
+    <fa-icon *ngIf="!isLoading"  [icon]="[ iconType, icon ]"></fa-icon>
+    <app-spinner *ngIf="isLoading"></app-spinner>
+</div>

@@ -1,0 +1,59 @@
+@import "@angular/material/theming";
+
+app-fa-icon-button{
+    margin: 0 1rem;
+}
+.app-actions{    
+    padding: 0 0.5rem;
+}
+.routes-wrapper{
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-left: solid grey 1px;
+    a{
+        text-decoration: none;
+    }
+}
+.toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    img {
+        margin: 0 16px;
+    }
+}
+
+.sample {
+    padding-top: 0.2em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    width: 3em;
+    height: 5em;
+}
+
+@mixin toolbar-theme($theme, $is-dark-theme) {
+    .toolbar {
+        background-color: mat-color(map-get($theme, primary));
+        @if $is-dark-theme {
+            color: black;
+        } @else {
+            color: white;
+        }
+    }
+
+    .routes-wrapper>a{
+        @if $is-dark-theme {
+            color: black;
+        } @else {
+            color: white;
+        }
+    }
+}

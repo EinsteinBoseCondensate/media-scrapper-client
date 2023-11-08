@@ -1,0 +1,20 @@
+
+
+
+@mixin common-app-styles($theme, $is-dark-theme) {
+    .app-action:hover {
+        background: map-get($theme, $warn);
+    }
+    
+    .mat-mdc-button:not(:disabled) {
+        @if $is-dark-theme {
+            color: black !important;
+        }
+        @else {
+            color: white !important;
+        }
+    }
+}
+.default-pointer{
+    cursor: default !important;
+}

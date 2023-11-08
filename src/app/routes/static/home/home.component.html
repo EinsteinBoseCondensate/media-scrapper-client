@@ -1,0 +1,42 @@
+<section id="home-master">
+    <div class="top-body">
+        <div class="search-wrapper">
+            <mat-form-field search-input appearance="outline">
+                <mat-label>Search</mat-label>
+                <input matInput [(ngModel)]="videosRequest.userInput" name="user-input" autocomplete="off">
+            </mat-form-field>
+
+            <app-fa-icon-button title="Search" (click)="search()"></app-fa-icon-button>
+        </div>
+    </div>
+    <div class="selected-video-container" *ngIf="selectedVideo">
+        <div class="video-player-wrapper">
+            <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+        </div>
+        <div class="add-to-my-videos-wrapper" *ngIf="auth0Service.isAuthenticated$ | async">
+            <app-fa-icon-button icon="thumbs-up" title="{{isSelectedVideoAmongMyVideos() ? 'Dislike' : 'Like'}}" sizeClass="size-2" (click)="isSelectedVideoAmongMyVideos() ? dislikeVideo(selectedVideo) : likeVideo(selectedVideo)"></app-fa-icon-button>
+        </div>
+    </div>
+    <div class="videos-list-wrapper">
+        <ul class="videos-list" *ngIf="videos?.length">
+            <li class="video" *ngFor="let video of videos" (click)="videoSelected(video)">
+                <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
+                </ng-container>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<ng-template #videoItem let-video="video">
+
+    <div class="row">
+        <div class="thumbnail" [style.background]="'url(' + video.thumbnailUrl + ')'">
+            <div class="duration"> {{ video.durationFormatted }} </div>
+        </div>
+        <div class="details">
+            <div class="title"> {{ video.title }} </div>
+            <div class="channel-title"> {{ video.channelTitle }} </div>
+        </div>
+    </div>
+
+</ng-template>
