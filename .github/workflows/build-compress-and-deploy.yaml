@@ -31,7 +31,7 @@ jobs:
         jq '.apiUri |= "$API_URL"' src/assets/app-settings/app-settings.json > /dev/null 
 
     - name: Build Angular App
-      run: npm run build -- --prod
+      run: npm run build -- --configuration production
 
     - name: Install Zip
       run: sudo apt-get install zip
