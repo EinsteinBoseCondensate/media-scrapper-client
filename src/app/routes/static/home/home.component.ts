@@ -59,10 +59,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onNearEndScroll(): void {
-    console.log('entered')
     if (!this.videos?.length || this.loadingVideos)
       return;
-    console.log('going to search')
+    
     this.search(false);
   }
 
