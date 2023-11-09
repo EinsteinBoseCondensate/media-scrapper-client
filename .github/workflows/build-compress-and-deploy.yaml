@@ -56,5 +56,6 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd repos/media-scrapper-client
+          rm -rf built-files
           unzip angular-app.zip -d /built-files          
           echo 'Deployment successful to digital ocean' 
