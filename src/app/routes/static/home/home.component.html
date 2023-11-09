@@ -12,12 +12,16 @@
     <section class="col" *ngIf="videos?.length">
         <div class="selected-video-container" *ngIf="selectedVideo">
             <div class="video-player-wrapper">
-                <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+                <iframe [class.collapsed]="collapsedIframeClass" [src]="selectedVideo.sanitizedUrl"></iframe>
             </div>
             <div class="add-to-my-videos-wrapper" *ngIf="auth0Service.isAuthenticated$ | async">
                 <app-fa-icon-button icon="thumbs-up" title="{{isSelectedVideoAmongMyVideos() ? 'Dislike' : 'Like'}}"
                     sizeClass="size-2"
                     (click)="isSelectedVideoAmongMyVideos() ? dislikeVideo(selectedVideo) : likeVideo(selectedVideo)"></app-fa-icon-button>
+                <div class="right-buttons-container">
+                    <app-fa-icon-button sizeClass="size-2" title="Close video player" icon="xmark" (click)="unselectVideo()"></app-fa-icon-button>
+                    <app-fa-icon-button sizeClass="size-2" [title]="collapseTitle" [icon]="collapseIcon" (click)="toggleCollapsedSelectedVideo()"></app-fa-icon-button>
+                </div>
             </div>
         </div>
         <div class="videos-list-wrapper" appScrollNearEnd (nearEnd)="onNearEndScroll()">

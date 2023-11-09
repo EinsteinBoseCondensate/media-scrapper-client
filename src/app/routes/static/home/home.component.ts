@@ -9,6 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '@auth0/auth0-angular';
 import { MyVideosService } from 'src/app/shared/services/my-videos.service';
 import { MyVideo, buildMyVideoFromVideo } from 'src/app/shared/models/backend/my-videos/my-videos.model';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-home',
@@ -26,20 +27,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     userInput: ''
   };
 
-  private lastUserInput = '';
-
   public selectedVideo?: Video;
 
   public videos?: Video[];
   public loadingVideos: boolean = false;
 
   public myVideos: MyVideo[] = [];
-
-  constructor(private readonly videosService: VideosService,
+  public collapseTitle: "Expand" | "Collapse" = "Collapse";
+  public collapseIcon: IconName = "angle-up"
+  public collapsedIframeClass: boolean = false;
+  constructor(
+    private readonly videosService: VideosService,
     private readonly domSanitizer: DomSanitizer,
     public readonly auth0Service: AuthService,
-    private readonly myVideosService: MyVideosService) {
-  }
+    private readonly myVideosService: MyVideosService
+    ) { }
+
   ngOnInit(): void {
     this.isAuthenticatedSubscription = this.auth0Service.isAuthenticated$
       .subscribe(isAuthenticated => {
@@ -71,7 +74,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     if (fromSearch) {
       this.videosRequest.continuationToken = '';
-      this.lastUserInput = this.videosRequest.userInput;
+      this.videosRequest.userInput;
     }
 
     this.videoSearchSubscription = this.videosService.getVideos(this.videosRequest)
@@ -90,6 +93,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       });
   }
 
+  unselectVideo(){
+    this.selectedVideo = undefined;
+    this.collapseTitle = "Collapse";
+    this.collapseIcon = "arrow-up";
+    this.collapsedIframeClass = false;
+  }
+  toggleCollapsedSelectedVideo(){
+    this.collapsedIframeClass = !this.collapsedIframeClass;
+    this.collapseTitle = this.collapseTitle === "Expand" ? "Collapse" : "Expand";
+    this.collapseIcon = this.collapseIcon === "arrow-down" ? "arrow-up" : "arrow-down";
+  }
   videoSelected(video: Video | undefined): void {
     if (!video)
       return;

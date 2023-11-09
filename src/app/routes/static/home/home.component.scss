@@ -36,9 +36,13 @@ mat-form-field[search-input] {
 }
 
 .video-player-wrapper>iframe {
-    --iframe-width: min(100vw, 2200px);
+    --iframe-width: min(100vw, 1000px);
     height: calc(var(--iframe-width) * 0.5625);
-    width: var(--iframe-width);
+    width: var(--iframe-width);    
+    transition: height 0.2s ease-in-out;
+}
+iframe.collapsed{
+    height: 0px !important;
 }
 
 .videos-list {
@@ -115,5 +119,7 @@ mat-form-field[search-input] {
     .add-to-my-videos-wrapper{
         padding: 1rem 0 0 min(5rem,2%);
         background-color: mat-color(map-get($theme, primary));
+        display: flex;
+        justify-content: space-between;
     }
 }
