@@ -5,7 +5,9 @@
     bottom: 0;
     margin-top: auto;
 }
-
+.footer{
+    height: 2.5rem;
+}
 @mixin footer-theme($theme, $is-dark-theme) {
     .footer {
         background-color: mat-color(map-get($theme, primary));
