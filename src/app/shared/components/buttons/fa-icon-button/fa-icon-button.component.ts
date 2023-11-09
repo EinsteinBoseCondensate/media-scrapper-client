@@ -8,7 +8,7 @@ import { IconName, IconPrefix } from '@fortawesome/fontawesome-svg-core';
 })
 export class FaIconButtonComponent implements OnInit {
   @Input()
-  public title: string = "Submit";
+  public title: string = "";
   @Input()
   public isLoading: boolean = false;
   @Input()

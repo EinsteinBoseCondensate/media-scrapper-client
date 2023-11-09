@@ -3,8 +3,9 @@
 app-fa-icon-button{
     margin: 0 1rem;
 }
-.app-actions{    
+.auth-action{    
     padding: 0 0.5rem;
+    cursor: pointer;
 }
 .routes-wrapper{
     padding: 0 0.5rem;
@@ -12,6 +13,7 @@ app-fa-icon-button{
     flex-direction: column;
     justify-content: space-around;
     border-left: solid grey 1px;
+    cursor: pointer;
     a{
         text-decoration: none;
     }

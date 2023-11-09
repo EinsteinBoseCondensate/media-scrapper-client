@@ -1,8 +1,8 @@
 <div class="toolbar" role="banner">
   <div class="column-inline-flex-start">
     <div class="row-inline-flex-start" *ngIf="auth0Service.isAuthenticated$ | async;else not_authenticated">
-      <div class="row-inline-flex-start app-actions" (click)="logout()">
-        <app-fa-icon-button title="Logout" icon="right-from-bracket" sizeClass="size-2"></app-fa-icon-button>
+      <div class="row-inline-flex-start auth-action" title="Logout"  (click)="logout()">
+        <app-fa-icon-button icon="right-from-bracket" sizeClass="size-2"></app-fa-icon-button>
         <span class="column-inline-flex-end center default-pointer">Logout</span>
       </div>
       <div class="routes-wrapper">
@@ -20,7 +20,7 @@
 
 <ng-template #not_authenticated>
   <div class="row-inline-flex-start">
-    <div class="row-inline-flex-start app-action" (click)="login()">
+    <div class="row-inline-flex-start auth-action" (click)="login()">
       <app-fa-icon-button title="Login" icon="right-to-bracket" sizeClass="size-2"></app-fa-icon-button>
       <span class="column-inline-flex-end center default-pointer">Login</span>
     </div>
