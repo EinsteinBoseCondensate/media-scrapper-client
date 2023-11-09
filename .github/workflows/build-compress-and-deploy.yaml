@@ -1,0 +1,60 @@
+name: Build, Compress and Deploy Angular App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_compress:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.13.0
+
+    - name: Install Dependencies
+      run: npm install
+
+    -name: Replace config with environment values
+      env:
+        API_URL: ${{ secrets.API_URL }}
+        APP_URL: ${{ secrets.APP_URL }}
+        AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID}}
+      run: |
+        jq '.clientId |= "$AUTH0_CLIENT_ID" | .apiUri |= "$API_URL" | .appUri |= "$APP_URL"' auth_config.json > /dev/null 
+        jq '.apiUri |= "$API_URL"' src/assets/app-settings/app-settings.json > /dev/null 
+
+    - name: Build Angular App
+      run: npm run build -- --prod
+
+    - name: Install Zip
+      run: sudo apt-get install zip
+
+    - name: Create Zip Archive
+      run: zip -r angular-app.zip dist/
+
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        source: "angular-app.zip"
+        target: repos/media-scrapper-client
+
+    - name: Deploy app
+      uses: appleboy/ssh-action@v1.0.0
+      with:
+        host: ${{secrets.SSH_HOST}} # IP address of the server you wish to ssh into
+        username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
+        password: ${{ secrets.SSH_PASSWORD }}
+        script: |
+          cd repos/media-scrapper-client
+          unzip angular-app.zip -d /built-files          
+          echo 'Deployment successful to digital ocean' 
