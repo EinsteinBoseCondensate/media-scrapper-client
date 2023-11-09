@@ -16,6 +16,7 @@ export class MyVideosComponent implements OnInit, OnDestroy {
   public selectedVideo?: MyVideo;
   public selectedVideoIndex: number = -1;
   private myVideosSubscription: Subscription = new Subscription();
+  public isMyVideosCallLoading: boolean = false;
   constructor(private readonly myVideosService: MyVideosService,
     private readonly domSanitizer: DomSanitizer) { }
 
@@ -45,6 +46,7 @@ export class MyVideosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.isMyVideosCallLoading = true;
     unsubscribeIfValid(this.myVideosSubscription);
     this.myVideosSubscription = this.myVideosService.getMyVideos()
       .subscribe(response => {
@@ -52,6 +54,7 @@ export class MyVideosComponent implements OnInit, OnDestroy {
           return;
 
         this.myVideos = response.items;
+        this.isMyVideosCallLoading = false;
       });
   }
 

@@ -1,20 +1,23 @@
 <section id="my-videos-master">
-   
-    <div class="selected-video-container" *ngIf="selectedVideo">
-        <div class="video-player-wrapper">
-            <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
-        </div>        
-        <div class="add-to-my-videos-wrapper">
-            <app-fa-icon-button icon="thumbs-up" sizeClass="size-2" (click)="removeVideo(selectedVideo, selectedVideoIndex)"></app-fa-icon-button>
+    <div class="col" *ngIf="!isMyVideosCallLoading;else loading">
+        <div class="selected-video-container" *ngIf="selectedVideo">
+            <div class="video-player-wrapper">
+                <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+            </div>
+            <div class="add-to-my-videos-wrapper">
+                <app-fa-icon-button icon="thumbs-up" sizeClass="size-2"
+                    (click)="removeVideo(selectedVideo, selectedVideoIndex)"></app-fa-icon-button>
+            </div>
         </div>
-    </div>
-    <div class="videos-list-wrapper">
-        <ul class="videos-list" *ngIf="myVideos?.length;else not_any_videos">
-            <li class="video" *ngFor="let video of myVideos;let videoIndex = index;" (click)="videoSelected(video, videoIndex)">
-                <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
-                </ng-container>
-            </li>
-        </ul>
+        <div class="videos-list-wrapper">
+            <ul class="videos-list" *ngIf="myVideos?.length;else not_any_videos">
+                <li class="video" *ngFor="let video of myVideos;let videoIndex = index;"
+                    (click)="videoSelected(video, videoIndex)">
+                    <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
+                    </ng-container>
+                </li>
+            </ul>
+        </div>
     </div>
 </section>
 
@@ -37,4 +40,8 @@
         It seems you have no videos...
     </div>
 
+</ng-template>
+
+<ng-template #loading>
+    <app-spinner></app-spinner>
 </ng-template>
