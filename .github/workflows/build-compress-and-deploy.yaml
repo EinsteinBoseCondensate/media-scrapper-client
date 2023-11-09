@@ -27,7 +27,7 @@ jobs:
         APP_URL: ${{ secrets.APP_URL }}
         AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID}}
       run: |
-        jq --arg auth0ClientId "$AUTH0_CLIENT_ID" apiUri "$API_URL" appUri "$APP_URL" '.clientId |= "$auth0ClientId" | .apiUri |= "$apiUri" | .appUri |= "$appUri"' auth_config.json > /dev/null 
+        jq --arg auth0ClientId "$AUTH0_CLIENT_ID" --arg apiUri "$API_URL" --arg appUri "$APP_URL" '.clientId |= "$auth0ClientId" | .apiUri |= "$apiUri" | .appUri |= "$appUri"' auth_config.json > /dev/null 
         jq --arg apiUrl "$API_URL" '.apiUrl |= "$apiUrl"' ./src/assets/app-settings/app-settings.json > /dev/null 
 
     - name: Build Angular App
