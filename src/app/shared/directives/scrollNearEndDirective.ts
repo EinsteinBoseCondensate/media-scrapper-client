@@ -14,7 +14,7 @@ import { Directive, OnInit, Output, Input, ElementRef, HostListener, EventEmitte
     private window!: Window;
   
     constructor(private el: ElementRef) {}
-  
+   
     ngOnInit(): void {
       // save window object for type safety
       this.window = window;
