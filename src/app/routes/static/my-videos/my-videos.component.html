@@ -7,6 +7,12 @@
             <div class="add-to-my-videos-wrapper">
                 <app-fa-icon-button icon="thumbs-up" sizeClass="size-2"
                     (click)="removeVideo(selectedVideo, selectedVideoIndex)"></app-fa-icon-button>
+                <div class="right-buttons-container">
+                    <app-fa-icon-button sizeClass="size-2" title="Close video player" icon="xmark"
+                        (click)="unselectVideo()"></app-fa-icon-button>
+                    <app-fa-icon-button sizeClass="size-2" [title]="collapseTitle" [icon]="collapseIcon"
+                        (click)="toggleCollapsedSelectedVideo()"></app-fa-icon-button>
+                </div>
             </div>
         </div>
         <div class="videos-list-wrapper">
