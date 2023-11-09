@@ -27,8 +27,8 @@ jobs:
         APP_URL: ${{ secrets.APP_URL }}
         AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID}}
       run: |
-        jq '.clientId |= "$AUTH0_CLIENT_ID" | .apiUri |= "$API_URL" | .appUri |= "$APP_URL"' auth_config.json
-        jq '.apiUrl |= "$API_URL"' ./src/assets/app-settings/app-settings.json
+        jq '.clientId |= "$AUTH0_CLIENT_ID" | .apiUri |= "$API_URL" | .appUri |= "$APP_URL"' auth_config.json > /dev/null 
+        jq '.apiUrl |= "$API_URL"' ./src/assets/app-settings/app-settings.json > /dev/null 
 
     - name: Build Angular App
       run: npm run build -- --configuration production
@@ -47,6 +47,7 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         source: "angular-app.zip"
         target: repos/media-scrapper-client
+        overwrite: true
 
     - name: Deploy app
       uses: appleboy/ssh-action@v1.0.0
