@@ -7,3 +7,8 @@
     margin-left: auto;
     margin-right: auto;
 }
+.selected-video-container{
+    position: sticky;
+    top: 60px;
+    z-index: 10;
+}
