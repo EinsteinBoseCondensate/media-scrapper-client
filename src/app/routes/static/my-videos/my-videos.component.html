@@ -2,10 +2,10 @@
     <div class="col" *ngIf="!isMyVideosCallLoading;else loading">
         <div class="selected-video-container" *ngIf="selectedVideo">
             <div class="video-player-wrapper">
-                <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+                <iframe [class.collapsed]="collapsedIframeClass" [src]="selectedVideo.sanitizedUrl"></iframe>
             </div>
             <div class="add-to-my-videos-wrapper">
-                <app-fa-icon-button icon="thumbs-up" sizeClass="size-2"
+                <app-fa-icon-button icon="heart-crack" sizeClass="size-2" title="Dislike"
                     (click)="removeVideo(selectedVideo, selectedVideoIndex)"></app-fa-icon-button>
                 <div class="right-buttons-container">
                     <app-fa-icon-button sizeClass="size-2" title="Close video player" icon="xmark"

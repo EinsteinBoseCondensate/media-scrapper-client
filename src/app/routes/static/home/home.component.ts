@@ -34,8 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public myVideos: MyVideo[] = [];
   public collapseTitle: "Expand" | "Collapse" = "Collapse";
-  public collapseIcon: IconName = "angle-up"
+  public collapseIcon: IconName = "angle-up";
+  public likeDislikeIcon: IconName = "heart";
+  public likeDislikeTitle: string = "Like";
   public collapsedIframeClass: boolean = false;
+
   constructor(
     private readonly videosService: VideosService,
     private readonly domSanitizer: DomSanitizer,
@@ -123,7 +126,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           return;
 
         this.myVideos.push(myVideo);
-
+        this.likeDislikeIcon = "heart-crack";
+        this.likeDislikeTitle = "Dislike";
       })
   }
 
@@ -138,7 +142,8 @@ export class HomeComponent implements OnInit, OnDestroy {
           return;
 
         this.myVideos = this.myVideos.filter(item => item.id !== myVideo.id);
-
+        this.likeDislikeIcon = "heart";
+        this.likeDislikeTitle = "Like";
       })
   }
 
