@@ -22,13 +22,13 @@ jobs:
       run: npm install
 
     -name: Replace config with environment values
-      env:
-        API_URL: ${{ secrets.API_URL }}
-        APP_URL: ${{ secrets.APP_URL }}
-        AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID}}
-      run: |
-        jq '.clientId |= "$AUTH0_CLIENT_ID" | .apiUri |= "$API_URL" | .appUri |= "$APP_URL"' auth_config.json > /dev/null 
-        jq '.apiUri |= "$API_URL"' src/assets/app-settings/app-settings.json > /dev/null 
+     env:
+       API_URL: ${{ secrets.API_URL }}
+       APP_URL: ${{ secrets.APP_URL }}
+       AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID}}
+     run: |
+       jq '.clientId |= "$AUTH0_CLIENT_ID" | .apiUri |= "$API_URL" | .appUri |= "$APP_URL"' auth_config.json > /dev/null 
+       jq '.apiUri |= "$API_URL"' src/assets/app-settings/app-settings.json > /dev/null 
 
     - name: Build Angular App
       run: npm run build -- --prod
