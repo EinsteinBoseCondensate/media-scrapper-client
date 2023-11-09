@@ -12,14 +12,12 @@
     justify-content: space-around;
     height: fit-content;
     padding: 1rem;
-    opacity: 0.8;    
+    opacity: 0.9;    
     position: sticky;
     top: 60px;
 
 }
-.add-to-my-videos-wrapper{
-    padding: 1rem 0 0 min(5rem,2%);
-}
+
 .search-wrapper {
     display: flex;
     width: min(28.5rem, calc(100vw + 5.5rem));
@@ -107,5 +105,9 @@ mat-form-field[search-input] {
 
     fa-icon svg path {
         fill: mat-color(map-get($theme, primary));
+    }
+    .add-to-my-videos-wrapper{
+        padding: 1rem 0 0 min(5rem,2%);
+        background-color: mat-color(map-get($theme, primary));
     }
 }

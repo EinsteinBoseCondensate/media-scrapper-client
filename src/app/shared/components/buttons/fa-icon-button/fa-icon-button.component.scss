@@ -1,6 +1,9 @@
 :host {
     margin-left: auto;
     cursor: pointer;
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 1rem;
 }
 .size-5{
     width: 5rem;
