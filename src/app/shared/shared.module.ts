@@ -15,10 +15,11 @@ import { FaIconButtonComponent } from './components/buttons/fa-icon-button/fa-ic
 import { VideosService } from './services/videos.service';
 import { RouterModule } from '@angular/router';
 import { MyVideosService } from './services/my-videos.service';
+import { ScrollNearEndDirective } from './directives/scrollNearEndDirective';
 
 
 @NgModule({
-  declarations: [FooterComponent, ToolbarComponent, ThemeChooserComponent, SpinnerComponent, CustomDataTableComponent, CustomDataTableServerPagedComponent, FaIconButtonComponent],
+  declarations: [FooterComponent, ToolbarComponent, ThemeChooserComponent, SpinnerComponent, CustomDataTableComponent, CustomDataTableServerPagedComponent, FaIconButtonComponent, ScrollNearEndDirective],
   imports: [
     CommonModule,
     SelectedMaterialModule,
@@ -42,7 +43,8 @@ import { MyVideosService } from './services/my-videos.service';
     FontAwesomeModule,
     CustomDataTableComponent,
     FaIconButtonComponent,
-    CustomDataTableServerPagedComponent
+    CustomDataTableServerPagedComponent,
+    ScrollNearEndDirective
   ]
 })
 export class SharedModule {

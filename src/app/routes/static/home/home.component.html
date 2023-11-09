@@ -9,26 +9,42 @@
             <app-fa-icon-button title="Search" (click)="search()"></app-fa-icon-button>
         </div>
     </div>
-    <div class="selected-video-container" *ngIf="selectedVideo">
-        <div class="video-player-wrapper">
-            <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+    <section class="col" *ngIf="videos?.length">
+        <div class="selected-video-container" *ngIf="selectedVideo">
+            <div class="video-player-wrapper">
+                <iframe [src]="selectedVideo.sanitizedUrl"></iframe>
+            </div>
+            <div class="add-to-my-videos-wrapper" *ngIf="auth0Service.isAuthenticated$ | async">
+                <app-fa-icon-button icon="thumbs-up" title="{{isSelectedVideoAmongMyVideos() ? 'Dislike' : 'Like'}}"
+                    sizeClass="size-2"
+                    (click)="isSelectedVideoAmongMyVideos() ? dislikeVideo(selectedVideo) : likeVideo(selectedVideo)"></app-fa-icon-button>
+            </div>
         </div>
-        <div class="add-to-my-videos-wrapper" *ngIf="auth0Service.isAuthenticated$ | async">
-            <app-fa-icon-button icon="thumbs-up" title="{{isSelectedVideoAmongMyVideos() ? 'Dislike' : 'Like'}}" sizeClass="size-2" (click)="isSelectedVideoAmongMyVideos() ? dislikeVideo(selectedVideo) : likeVideo(selectedVideo)"></app-fa-icon-button>
+        <div class="videos-list-wrapper" appScrollNearEnd (nearEnd)="onNearEndScroll()">
+            <ul class="videos-list">
+                <li class="video" *ngFor="let video of videos" (click)="videoSelected(video)">
+                    <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
+                    </ng-container>
+                </li>
+                <li class="row center" *ngIf="loadingVideos">
+                    <app-spinner></app-spinner>
+                </li>
+            </ul>
         </div>
-    </div>
-    <div class="videos-list-wrapper">
-        <ul class="videos-list" *ngIf="videos?.length">
-            <li class="video" *ngFor="let video of videos" (click)="videoSelected(video)">
-                <ng-container *ngTemplateOutlet="videoItem; context: { video: video }">
-                </ng-container>
-            </li>
-        </ul>
-    </div>
+    </section>
+    <section class="col" *ngIf="!videos?.length && loadingVideos">
+        <div class="row center p-2" *ngIf="loadingVideos">
+            <app-spinner></app-spinner>
+        </div>
+    </section>
+    <section class="col" *ngIf="!videos?.length && !loadingVideos">
+        <div class="row center p-2">
+            Search something to get some videos
+        </div>
+    </section>
 </section>
 
 <ng-template #videoItem let-video="video">
-
     <div class="row">
         <div class="thumbnail" [style.background]="'url(' + video.thumbnailUrl + ')'">
             <div class="duration"> {{ video.durationFormatted }} </div>
@@ -38,5 +54,4 @@
             <div class="channel-title"> {{ video.channelTitle }} </div>
         </div>
     </div>
-
 </ng-template>

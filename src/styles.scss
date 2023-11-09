@@ -28,17 +28,16 @@
 body {
     display: block;
     position: absolute;
-    height: 100%;
     width: 100%;
-    overflow: hidden;
+    min-height: 100vh;
     margin: 0;
 }
 .master {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
-    height: 100%;
     width: 100%;
+    min-height: 100vh;
     top: 0;
     left: 0;
 }
@@ -47,7 +46,6 @@ body {
 #content {
     display: inline-flex;
     width: 100%;
-    height:  -webkit-fill-available !important;
     flex-direction: column;
 }
 
