@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { Subscription } from 'rxjs';
 import { MyVideo } from 'src/app/shared/models/backend/my-videos/my-videos.model';
 import { MyVideosService } from 'src/app/shared/services/my-videos.service';
@@ -17,6 +18,9 @@ export class MyVideosComponent implements OnInit, OnDestroy {
   public selectedVideoIndex: number = -1;
   private myVideosSubscription: Subscription = new Subscription();
   public isMyVideosCallLoading: boolean = false;
+  public collapseTitle: "Expand" | "Collapse" = "Collapse";
+  public collapseIcon: IconName = "angle-up"
+  public collapsedIframeClass: boolean = false;
   constructor(private readonly myVideosService: MyVideosService,
     private readonly domSanitizer: DomSanitizer) { }
 
@@ -43,6 +47,18 @@ export class MyVideosComponent implements OnInit, OnDestroy {
     video.sanitizedUrl ||= this.domSanitizer.bypassSecurityTrustResourceUrl(video.url)
     this.selectedVideo = video;
     this.selectedVideoIndex = index;
+  }
+
+  unselectVideo(){
+    this.selectedVideo = undefined;
+    this.collapseTitle = "Collapse";
+    this.collapseIcon = "arrow-up";
+    this.collapsedIframeClass = false;
+  }
+  toggleCollapsedSelectedVideo(){
+    this.collapsedIframeClass = !this.collapsedIframeClass;
+    this.collapseTitle = this.collapseTitle === "Expand" ? "Collapse" : "Expand";
+    this.collapseIcon = this.collapseIcon === "arrow-down" ? "arrow-up" : "arrow-down";
   }
 
   ngOnInit(): void {
