@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', async () => {
     await page.navigateTo();
-    expect(await page.getTitleText()).toEqual('custom-theme-and-translate-example app is running!');
+    expect(await page.getTitleText()).toEqual('media-scrapper-client app is running!');
   });
 
   afterEach(async () => {

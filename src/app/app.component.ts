@@ -6,6 +6,6 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'custom-theme-and-translate-example';
+  title = 'media-scrapper-client';
   
 }

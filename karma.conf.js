@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/custom-theme-and-translate-example'),
+      dir: require('path').join(__dirname, './coverage/media-scrapper-client'),
       subdir: '.',
       reporters: [
         { type: 'html' },

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'custom-theme-and-translate-example'`, () => {
+  it(`should have as title 'media-scrapper-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('custom-theme-and-translate-example');
+    expect(app.title).toEqual('media-scrapper-client');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('custom-theme-and-translate-example app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('media-scrapper-client app is running!');
   });
 });
