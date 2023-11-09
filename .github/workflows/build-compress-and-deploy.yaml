@@ -21,6 +21,13 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
+    - name: Print Before jq
+      run: |
+        echo "Before jq auth_config.json:"
+        cat auth_config.json
+        echo "Before jq app-settings.json:"
+        cat ./src/assets/app-settings/app-settings.json
+
     - name: Replace config with environment values
       env:
         API_URL: ${{ secrets.API_URL }}
@@ -29,6 +36,13 @@ jobs:
       run: |
         jq --arg auth0ClientId "$AUTH0_CLIENT_ID" --arg apiUri "$API_URL" --arg appUri "$APP_URL" '.clientId |= $auth0ClientId | .apiUri |= $apiUri | .appUri |= $appUri' auth_config.json > /dev/null 
         jq --arg apiUrl "$API_URL" '.apiUrl |= $apiUrl' ./src/assets/app-settings/app-settings.json
+
+    - name: Print after jq
+      run: |
+        echo "After jq auth_config.json:"
+        cat auth_config.json
+        echo "After jq app-settings.json:"
+        cat ./src/assets/app-settings/app-settings.json
 
     - name: Build Angular App
       run: npm run build -- --configuration production
