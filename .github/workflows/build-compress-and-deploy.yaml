@@ -35,6 +35,11 @@ jobs:
     - name: Build Angular App
       run: npm run build -- --configuration production
 
+    - name: Check mp3 files are fine
+      run: |
+        cd dist/assets
+        ls
+
     - name: Install Zip
       run: sudo apt-get install zip
 
