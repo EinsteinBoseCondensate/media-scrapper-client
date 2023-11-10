@@ -35,19 +35,13 @@ jobs:
     - name: Build Angular App
       run: npm run build -- --configuration production
 
-    - name: Check mp3 files are fine
-      run: |
-        cd ./dist/media-scrapper-client/assets
-        ls
-
     - name: Install Zip
       run: sudo apt-get install zip
 
     - name: Create Zip Archive
       run: |
-        cd dist
-        zip -r ../angular-app.zip *
-        cd ..
+        cd dist/media-scrapper-client
+        zip -r ../../angular-app.zip *
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
@@ -66,8 +60,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
+          rm -f repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/*
           cd repos/media-scrapper-client
-          sudo unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot          
-          sudo mv /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/media-scrapper-client/* /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/
-          sudo rm -r /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/media-scrapper-client
+          unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot              
           echo 'Deployment successful to digital ocean' 
