@@ -63,4 +63,6 @@ jobs:
         script: |
           cd repos/media-scrapper-client
           unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot          
+          mv /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/media-scrapper-client/* /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/
+          rm -r /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/media-scrapper-client
           echo 'Deployment successful to digital ocean' 
