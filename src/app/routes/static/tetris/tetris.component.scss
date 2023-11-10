@@ -1,0 +1,140 @@
+.game-main-container{
+    --main-game-board-height: calc(100vh - 97.5px);
+    --game-container-width-ratio: 0.9;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+main{
+    --main-width: calc(var(--main-game-board-height)/(2*var(--game-container-width-ratio)));
+    display: flex;
+    height: var(--main-game-board-height);
+    width: var(--main-width);
+}
+.game-container{
+    --main-game-container-width: calc(var(--game-container-width-ratio)*100%);
+    display: flex;
+    width: var(--main-game-container-width);
+    height: 100%;
+    flex-wrap: wrap;
+    flex: 1;
+}
+.score-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: calc((1 - var(--game-container-width-ratio))*100%);
+    height: 100%;    
+}
+.score-and-level{
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: consolas;
+    font-weight: bolder;
+    font-size: 1.2rem;
+}
+.score, .level{
+    height: 3rem;
+    width: 100%;
+    padding: 0.6rem;
+    text-align: center;
+}
+.next-pieces{
+    height: 100px;
+    width: 100%;  
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 1rem;
+
+}
+.next-piece, .next-next-piece{
+    width: 100%;
+}
+.game-cell{
+    display: flex;
+    flex-basis: 10%;
+    height: 5%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 10%;
+    background-size: 100% 100% !important;
+}
+.stick{
+    background: #ff6a00;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.l{
+    background: red;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.l2{
+    background: burlywood;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.s{
+    background: greenyellow;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.s2{
+    background: #ff00d4;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.pyramid{
+    background: purple;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+.square{
+    background: #FFB700;
+    background-image: url('~src/assets/figure-cell.svg');
+}
+
+.mini-stick, .mini-square, .mini-s, .mini-s2, .mini-l, .mini-l2, .mini-pyramid{    
+    background-size: 100% 100% !important;
+    height: 3rem;
+}
+
+.mini-stick{
+    background-image: url('~src/assets/mini-stick.svg');
+}
+.mini-l{
+    background-image: url('~src/assets/mini-l.svg');
+}
+.mini-l2{
+    background-image: url('~src/assets/mini-l2.svg');
+}
+.mini-s{
+    background-image: url('~src/assets/mini-s.svg');
+}
+.mini-s2{
+    background-image: url('~src/assets/mini-s2.svg');
+}
+.mini-pyramid{
+    background-image: url('~src/assets/mini-pyramid.svg');
+}
+.mini-square{
+    background-image: url('~src/assets/mini-square.svg');
+}
+.start-game-overlay,
+.end-game-overlay{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    right: 0;
+    opacity: 0.85;
+    text-align: center;
+    padding-top: 20%;
+    overflow: hidden;
+    font-size: 2.7rem !important;
+    font-weight: bolder !important;
+    color: white;
+}
+.hidden{
+    display: none;
+}
+

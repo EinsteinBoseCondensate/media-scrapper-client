@@ -1,0 +1,25 @@
+@mixin tetris-theme($theme, $is-dark-theme) {
+    .game-container {
+        background-color: darken(mat-color(map-get($theme, primary)), 20%);
+    }
+
+    .game-main-container {
+        background-color: lighten(mat-color(map-get($theme, primary)), 10%);
+    }
+
+    .score-container{
+        background: darken(mat-color(map-get($theme, warn)), 30%);
+    }
+
+    
+    .start-game-overlay,
+    .end-game-overlay {
+        background: darken(mat-color(map-get($theme, warn)), 90%);
+        
+    }
+
+    .score-and-level,
+    .next-pieces {
+        background: darken(mat-color(map-get($theme, accent)), 10%);
+    }
+}
