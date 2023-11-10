@@ -39,7 +39,10 @@ jobs:
       run: sudo apt-get install zip
 
     - name: Create Zip Archive
-      run: zip -r angular-app.zip dist/
+      run: |
+        cd dist
+        zip -r ../angular-app.zip *
+        cd ..
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
@@ -59,6 +62,5 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
           cd repos/media-scrapper-client
-          rm -rf built-files
           unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot          
           echo 'Deployment successful to digital ocean' 
