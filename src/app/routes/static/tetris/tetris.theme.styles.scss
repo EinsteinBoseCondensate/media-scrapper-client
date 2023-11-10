@@ -1,25 +1,32 @@
 @mixin tetris-theme($theme, $is-dark-theme) {
+
+    $main-container-color: mat-color(map-get($theme, primary));
+    $overlays-color: mat-color(map-get($theme, warn));
+    $score-and-level-color: mat-color(map-get($theme, accent));
+
     .game-container {
-        background-color: darken(mat-color(map-get($theme, primary)), 20%);
+        background: linear-gradient(darken($main-container-color, 40%), darken($main-container-color, 90%));
     }
 
     .game-main-container {
-        background-color: lighten(mat-color(map-get($theme, primary)), 10%);
+
+        background: linear-gradient(darken($main-container-color, 10%), darken($main-container-color, 70%));
     }
 
-    .score-container{
-        background: darken(mat-color(map-get($theme, warn)), 30%);
+    .score-container {
+        background: linear-gradient(darken($overlays-color, 10%), darken($overlays-color, 50%));
     }
 
-    
+
     .start-game-overlay,
     .end-game-overlay {
-        background: darken(mat-color(map-get($theme, warn)), 90%);
-        
+
+        background: linear-gradient(darken($overlays-color, 10%), darken($overlays-color, 90%));
+
     }
 
     .score-and-level,
     .next-pieces {
-        background: darken(mat-color(map-get($theme, accent)), 10%);
+        background: linear-gradient(darken($score-and-level-color, 5%), darken($score-and-level-color, 20%));
     }
 }
