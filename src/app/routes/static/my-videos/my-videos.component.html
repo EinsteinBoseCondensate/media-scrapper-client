@@ -2,7 +2,7 @@
     <div class="col" *ngIf="!isMyVideosCallLoading;else loading">
         <div class="selected-video-container" *ngIf="selectedVideo">
             <div class="video-player-wrapper">
-                <iframe [class.collapsed]="collapsedIframeClass" [src]="selectedVideo.sanitizedUrl"></iframe>
+                <iframe allowfullscreen [class.collapsed]="collapsedIframeClass" [src]="selectedVideo.sanitizedUrl" ></iframe>
             </div>
             <div class="add-to-my-videos-wrapper">
                 <app-fa-icon-button icon="heart-crack" sizeClass="size-2" title="Dislike"
