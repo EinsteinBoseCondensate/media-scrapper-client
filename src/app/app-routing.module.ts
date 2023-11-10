@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'my-videos',
     component: MyVideosComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 
