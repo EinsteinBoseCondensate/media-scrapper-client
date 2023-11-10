@@ -37,7 +37,7 @@ jobs:
 
     - name: Check mp3 files are fine
       run: |
-        cd ./dist/assets
+        cd ./dist/media-scrapper-client/assets
         ls
 
     - name: Install Zip
