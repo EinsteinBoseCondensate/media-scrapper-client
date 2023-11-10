@@ -6,8 +6,8 @@
 
 //default-theme
 $primary: mat.define-palette($mat-indigo);
-$accent: mat.define-palette($mat-pink, A200, A100, A400);
-$warn: mat.define-palette($mat-red);
+$accent: mat.define-palette($mat-light-blue);
+$warn: mat.define-palette($mat-blue);
 $theme: mat.define-light-theme((
     color: (
         primary: $primary,
@@ -28,8 +28,8 @@ $theme: mat.define-light-theme((
 
 //dark-theme
 $dark-primary: mat.define-palette($mat-pink);
-$dark-accent: mat.define-palette($mat-amber, A400, A100, A700);
-$dark-warn: mat.define-palette($mat-red);
+$dark-accent: mat.define-palette($mat-blue-grey);
+$dark-warn: mat.define-palette($mat-purple);
 $dark-theme: mat.define-dark-theme((
     color: (
         primary: $dark-primary,

@@ -7,6 +7,7 @@
 
 @import "../../routes/static/my-videos/my-videos.component.scss";
 @import "./swal.wrapper/swal.wrapper.scss";
+@import "../../routes/static/tetris/tetris.theme.styles.scss";
 
 
 
@@ -16,4 +17,6 @@
   @include footer-theme($theme, $is-dark-theme);
   @include home-theme($theme, $is-dark-theme);
   @include my-videos-theme($theme, $is-dark-theme);
+  @include tetris-theme($theme, $is-dark-theme);
+
 }
