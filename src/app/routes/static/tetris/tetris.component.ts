@@ -172,6 +172,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
   public gameStarted: boolean = false;
   public gamePaused: boolean = false;
   public gameOverValue: boolean = false;
+  public freshGame: boolean = true;
   private currentFigureRowNumber: number = 0;
   private needNextFigure = false;
   public score = 0;
@@ -291,10 +292,11 @@ export class TetrisComponent implements OnInit, OnDestroy {
     return indexToRotate;
   }
 
-  private initialize = () => {
+  private initialize = () => {    
     this.gameOverValue = false;
     this.gamePaused = false;
     this.gameStarted = true;
+    this.freshGame = false;
     this.cells?.forEach(cell => cell.classList.value = 'game-cell');
 
     while (this.instantGameFigures.length)
@@ -528,8 +530,10 @@ export class TetrisComponent implements OnInit, OnDestroy {
     const YAxisDelta = touchObject.pageY - this.touchStartYCoordinate;
     const absXAxisDelta = Math.abs(XAxisDelta);
     const absYAxisDelta = Math.abs(YAxisDelta);
+    
+    const isSimpleTouch = absXAxisDelta < this.touchStartGamePixelsThreshold && absYAxisDelta < this.touchStartGamePixelsThreshold;
 
-    if ((absXAxisDelta < this.touchStartGamePixelsThreshold && absYAxisDelta < this.touchStartGamePixelsThreshold) || this.gamePaused) {
+    if (isSimpleTouch || this.gamePaused) {
       this.startOrTogglePauseGame();
       return;
     }
