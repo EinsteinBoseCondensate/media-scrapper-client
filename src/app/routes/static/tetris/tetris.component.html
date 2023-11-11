@@ -256,7 +256,7 @@
                 </div>
             </div>
         </div>
-        <div class="start-game-overlay" [class.hidden]="freshGame && !gameStarted">
+        <div class="start-game-overlay" [class.hidden]="!freshGame || gameStarted">
             Press ENTER or touch de screen to run the game
             <br />
             Controls:
