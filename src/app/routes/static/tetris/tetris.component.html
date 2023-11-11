@@ -274,7 +274,7 @@
         <div class="end-game-overlay" [class.hidden]="!gameOverValue && gameStarted || freshGame">
             GAME OVER! Press ENTER to run the game
         </div>
-        <div class="end-game-overlay" [class.hidden]="!gamePaused && gameStarted || freshGame">
+        <div class="end-game-overlay" [class.hidden]="!gamePaused && gameStarted || freshGame || gameOverValue">
             GAME PAUSED
         </div>
     </main>
