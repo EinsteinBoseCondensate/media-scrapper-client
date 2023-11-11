@@ -256,7 +256,7 @@
                 </div>
             </div>
         </div>
-        <div class="start-game-overlay" [class.hidden]="!gameOverValue && !gameStarted">
+        <div class="start-game-overlay" [class.hidden]="freshGame && !gameStarted">
             Press ENTER or touch de screen to run the game
             <br />
             Controls:
@@ -271,10 +271,10 @@
             <br />
             Enter or touch to pause the game
         </div>
-        <div class="end-game-overlay" [class.hidden]="gameOverValue && !gameStarted">
+        <div class="end-game-overlay" [class.hidden]="gameOverValue && !gameStarted || !freshGame">
             GAME OVER! Press ENTER to run the game
         </div>
-        <div class="end-game-overlay" [class.hidden]="gamePaused && gameStarted && !gameOverValue">
+        <div class="end-game-overlay" [class.hidden]="!gamePaused && gameStarted || !freshGame">
             GAME PAUSED
         </div>
     </main>
