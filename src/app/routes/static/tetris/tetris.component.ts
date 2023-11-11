@@ -487,6 +487,8 @@ export class TetrisComponent implements OnInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   public addKeyEventListener(e: KeyboardEvent) {
+    if (this.gamePaused && e.key !== this.keys.enter)
+      return;
 
     switch (e.key) {
       case this.keys.up:
@@ -511,7 +513,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
   @HostListener('window:touchstart', ['$event'])
   public addTouchEndEventListener(e: TouchEvent) {
 
-    if(!e.changedTouches.length)
+    if (!e.changedTouches.length)
       return;
 
     const touchObject = e.changedTouches[0];
@@ -523,7 +525,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
   @HostListener('window:touchend', ['$event'])
   public addTouchStartEventListener(e: TouchEvent) {
 
-    if(!e.changedTouches.length)
+    if (!e.changedTouches.length)
       return;
 
     const touchObject = e.changedTouches[0];
@@ -533,21 +535,21 @@ export class TetrisComponent implements OnInit, OnDestroy {
     const absXAxisDelta = Math.abs(XAxisDelta);
     const absYAxisDelta = Math.abs(YAxisDelta);
 
-    if(absXAxisDelta < this.touchStartGamePixelsThreshold && absYAxisDelta < this.touchStartGamePixelsThreshold){
+    if ((absXAxisDelta < this.touchStartGamePixelsThreshold && absYAxisDelta < this.touchStartGamePixelsThreshold) || this.gamePaused) {
       this.startOrTogglePauseGame();
       return;
     }
 
-    if(Math.abs(XAxisDelta) >= Math.abs(YAxisDelta)){
-      if(XAxisDelta > 0)
+    if (Math.abs(XAxisDelta) >= Math.abs(YAxisDelta)) {
+      if (XAxisDelta > 0)
         this.moveFigureRight();
       else
         this.moveFigureLeft();
-    }else{
-      if(YAxisDelta > 0)
-        this.rotateFigure();
-      else
+    } else {
+      if (YAxisDelta > 0)
         this.moveFigureDownOrPlaceIt(true);
+      else
+        this.rotateFigure();
     }
   }
 }
