@@ -168,13 +168,10 @@ export class TetrisComponent implements OnInit, OnDestroy {
   private nextFigure!: ElementRef;
   @ViewChild('nextNextFigure')
   private nextNextFigure!: ElementRef;
-  @ViewChild('startOverlay')
-  private startOverlay!: ElementRef;
-  @ViewChild('endGameOverlay')
-  private endGameOverlay!: ElementRef;
   private rowsToCompleteInitialIndexes: number[] = [];
-  private gameStarted: boolean = false;
-  private gamePaused: boolean = false;
+  public gameStarted: boolean = false;
+  public gamePaused: boolean = false;
+  public gameOverValue: boolean = false;
   private currentFigureRowNumber: number = 0;
   private needNextFigure = false;
   public score = 0;
@@ -295,12 +292,9 @@ export class TetrisComponent implements OnInit, OnDestroy {
   }
 
   private initialize = () => {
+    this.gameOverValue = false;
+    this.gamePaused = false;
     this.gameStarted = true;
-    const startOverlayClassList = this.startOverlay.nativeElement.classList;
-    console.log(this.startOverlay)
-    startOverlayClassList.contains('hidden') ? undefined : startOverlayClassList.add('hidden');
-    const endOverlayClassList = this.endGameOverlay.nativeElement.classList;
-    !endOverlayClassList.contains('hidden') ? endOverlayClassList.add('hidden') : undefined;
     this.cells?.forEach(cell => cell.classList.value = 'game-cell');
 
     while (this.instantGameFigures.length)
@@ -423,7 +417,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
   private gameOver = () => {
     this.nextFigure.nativeElement.classList.value = 'next-piece';
     this.nextNextFigure.nativeElement.classList.value = 'next-next-piece';
-    this.endGameOverlay.nativeElement.classList.remove('hidden');
+    this.gameOverValue = true;
     this.gameStarted = false;
   }
 
