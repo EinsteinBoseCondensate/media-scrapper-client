@@ -181,8 +181,10 @@ export class TetrisComponent implements OnInit, OnDestroy {
   public currentLevel = 1;
   private scoreBreakPoints = [50, 100, 150, 250, 350, 400, 550, 700, 850];
   private placedCellClassName = 'placed';
-  private completedCellClassName = 'completed'
   private figureKeys = Object.keys(this.gameFigures);
+  private touchStartXCoordinate: number = 0;
+  private touchStartYCoordinate: number = 0;
+  private touchStartGamePixelsThreshold: number = 10;
 
   private getNewFigure = () => {
     const newFigure = this.instantGameFigures[0];
@@ -459,7 +461,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
 
   private runGame = async () => {
     while (this.gameStarted) {
-      
+
       if (!this.gamePaused) {
         if (this.needNextFigure && !this.populateNextFigureOrGameOver()) {
           return;
@@ -473,7 +475,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
 
   private delay = () => new Promise(res => setTimeout(res, this.currentLevel === 1 ? 1000 : 1000 / (0.8 * this.currentLevel)));
 
-  private startGame = () => {
+  private startOrTogglePauseGame = () => {
     if (this.gameStarted) {
       this.gamePaused = !this.gamePaused;
       return;
@@ -500,9 +502,52 @@ export class TetrisComponent implements OnInit, OnDestroy {
         this.moveFigureDownOrPlaceIt(true);
         break;
       case this.keys.enter:
-        this.startGame();
+        this.startOrTogglePauseGame();
         break;
     }
   }
 
+
+  @HostListener('window:touchstart', ['$event'])
+  public addTouchEndEventListener(e: TouchEvent) {
+
+    if(!e.changedTouches.length)
+      return;
+
+    const touchObject = e.changedTouches[0];
+
+    this.touchStartXCoordinate = touchObject.pageX;
+    this.touchStartYCoordinate = touchObject.pageY;
+  }
+
+  @HostListener('window:touchend', ['$event'])
+  public addTouchStartEventListener(e: TouchEvent) {
+
+    if(!e.changedTouches.length)
+      return;
+
+    const touchObject = e.changedTouches[0];
+
+    const XAxisDelta = touchObject.pageX - this.touchStartXCoordinate;
+    const YAxisDelta = touchObject.pageY - this.touchStartYCoordinate;
+    const absXAxisDelta = Math.abs(XAxisDelta);
+    const absYAxisDelta = Math.abs(YAxisDelta);
+
+    if(absXAxisDelta < this.touchStartGamePixelsThreshold && absYAxisDelta < this.touchStartGamePixelsThreshold){
+      this.startOrTogglePauseGame();
+      return;
+    }
+
+    if(Math.abs(XAxisDelta) >= Math.abs(YAxisDelta)){
+      if(XAxisDelta > 0)
+        this.moveFigureRight();
+      else
+        this.moveFigureLeft();
+    }else{
+      if(YAxisDelta > 0)
+        this.rotateFigure();
+      else
+        this.moveFigureDownOrPlaceIt(true);
+    }
+  }
 }
