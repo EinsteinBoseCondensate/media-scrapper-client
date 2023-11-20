@@ -11,6 +11,7 @@ import { AuthHttpInterceptor, AuthModule } from '@auth0/auth0-angular';
 import { CacheLocation } from '@auth0/auth0-spa-js';
 import { environment as env } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Auth0AuthnExtensionHttpInterceptor } from './shared/interceptors/auth-extension-http-interceptor';
 @NgModule({
   declarations: [
     AppComponent
@@ -33,6 +34,11 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Auth0AuthnExtensionHttpInterceptor,
       multi: true,
     },
     {

@@ -20,4 +20,7 @@ export const environment = {
   httpInterceptor: {
     allowedList: [`${apiUri}/user-videos/*`],
   },
+  authExtensionHttpInterceptor: {
+    allowedList:[`${apiUri}/auth0/*`]
+  }
 };
