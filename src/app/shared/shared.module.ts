@@ -16,6 +16,7 @@ import { VideosService } from './services/videos.service';
 import { RouterModule } from '@angular/router';
 import { MyVideosService } from './services/my-videos.service';
 import { ScrollNearEndDirective } from './directives/scrollNearEndDirective';
+import { Auth0SubmitDataService } from './services/auth0-submit-data.service';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ScrollNearEndDirective } from './directives/scrollNearEndDirective';
   providers: [
     ApiService,
     VideosService,
-    MyVideosService
+    MyVideosService,
+    Auth0SubmitDataService
   ],
   exports: [
     ToolbarComponent,
@@ -54,7 +56,8 @@ export class SharedModule {
       providers: [
         ApiService,
         VideosService,
-        MyVideosService
+        MyVideosService,
+        Auth0SubmitDataService
       ]
     }
   }

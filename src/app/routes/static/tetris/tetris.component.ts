@@ -538,7 +538,7 @@ export class TetrisComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (Math.abs(XAxisDelta) >= Math.abs(YAxisDelta)) {
+    if (absXAxisDelta >= absYAxisDelta) {
       if (XAxisDelta > 0)
         this.moveFigureRight();
       else

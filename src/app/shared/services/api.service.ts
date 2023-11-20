@@ -7,19 +7,18 @@ import { AppSettingsService } from './app-settings.service';
     providedIn: 'root',
   })
   export class ApiService {
-  
+    private readonly httpHeaders: HttpHeaders;
     constructor(
-      private http: HttpClient) { }
+      private http: HttpClient) { 
+        this.httpHeaders = this.setHeaders();
+      }
   
     private setHeaders(): HttpHeaders {
       const headersConfig = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Cache-Control': 'no-store, no-cache'
-      };
-  
-      
-  
+      };  
       return new HttpHeaders(headersConfig);
     }
   
@@ -49,7 +48,7 @@ import { AppSettingsService } from './app-settings.service';
     }
   
     get(path: string, params: any = new HttpParams()): Observable<any> {
-      return this.http.get(`${AppSettingsService.settings.apiUrl}${path}`, { headers: this.setHeaders(), params: params })
+      return this.http.get(`${AppSettingsService.settings.apiUrl}${path}`, { headers: this.httpHeaders, params: params })
         .pipe(          
           catchError(async (error: HttpErrorResponse) => this.formatErrors(error))
         );
@@ -60,7 +59,7 @@ import { AppSettingsService } from './app-settings.service';
     }
   
     put(path: string, body: Object = {}): Observable<any> {
-      return this.http.put(`${AppSettingsService.settings.apiUrl}${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+      return this.http.put(`${AppSettingsService.settings.apiUrl}${path}`, JSON.stringify(body), { headers: this.httpHeaders })
         .pipe(
           map((res: Object) => res),
           catchError(async (error: HttpErrorResponse) => this.formatErrors(error))
@@ -68,7 +67,7 @@ import { AppSettingsService } from './app-settings.service';
     }
   
     post(path: string, body: Object = {}): Observable<any> {
-      return this.http.post(`${AppSettingsService.settings.apiUrl}${path}`, JSON.stringify(body), { headers: this.setHeaders() })
+      return this.http.post(`${AppSettingsService.settings.apiUrl}${path}`, JSON.stringify(body), { headers: this.httpHeaders })
         .pipe(
           map((res: Object) => res),
           catchError(async(error: HttpErrorResponse) => this.formatErrors(error))
@@ -77,7 +76,7 @@ import { AppSettingsService } from './app-settings.service';
   
     
     delete(path: string): Observable<any> {
-      return this.http.delete(`${AppSettingsService.settings.apiUrl}${path}`, { headers: this.setHeaders() })
+      return this.http.delete(`${AppSettingsService.settings.apiUrl}${path}`, { headers: this.httpHeaders })
         .pipe(
           map((res: Object) => res),
           catchError(async (error: HttpErrorResponse) => this.formatErrors(error))

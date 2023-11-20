@@ -1,0 +1,21 @@
+<section id="authn-ext-master">
+    <form [formGroup]="userDataFormGroup">
+
+        <input type="hidden" formControlName="id">
+        <div class="field-wrapper">
+            <mat-form-field appearance="outline">
+                <mat-label>First name</mat-label>
+                <input matInput formControlName="firstName" autocomplete="off">
+            </mat-form-field>
+        </div>
+        <div class="field-wrapper">
+            <mat-form-field appearance="outline">
+                <mat-label>Last name</mat-label>
+                <input matInput formControlName="lastName" autocomplete="off">
+            </mat-form-field>
+        </div>
+        <div class="field-wrapper">
+            <app-fa-icon-button title="Search" (click)="submitData()" icon="user"></app-fa-icon-button>
+        </div>
+    </form>
+</section>
