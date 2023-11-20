@@ -13,6 +13,8 @@ export class Auth0AuthnExtensionHttpInterceptor implements HttpInterceptor{
         return next.handle(req);
     }
     isUrlBindedToHeaderAppendNeed(url: string): boolean{
+        console.log(url);
+        console.log(env.authExtensionHttpInterceptor.allowedList);
         return !!env.authExtensionHttpInterceptor.allowedList.filter(address => {
             if(address.includes('/*')) {
                 return url.startsWith(address.replace('/*', ''))
