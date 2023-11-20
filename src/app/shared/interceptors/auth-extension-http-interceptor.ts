@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
 export class Auth0AuthnExtensionHttpInterceptor implements HttpInterceptor{
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
         if(this.isUrlBindedToHeaderAppendNeed(req.url))
-            req.headers.append('Authorization', `Bearer ${Auth0JwtService.rawToken}`);
+            req.headers.set('Authorization', `Bearer ${Auth0JwtService.rawToken}`);
 
         return next.handle(req);
     }
