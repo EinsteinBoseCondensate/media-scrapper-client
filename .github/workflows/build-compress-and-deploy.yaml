@@ -60,7 +60,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
-          rm -f repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot/*
+          rm -f repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net8.0/wwwroot/*
           cd repos/media-scrapper-client
-          unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net7.0/wwwroot              
+          unzip -o angular-app.zip -d /root/repos/media-scrapper-server/MediaScrapperAPI/bin/Release/net8.0/wwwroot              
           echo 'Deployment successful to digital ocean' 
