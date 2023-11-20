@@ -8,7 +8,7 @@ export class Auth0JwtService{
     static rawToken: string;
     static state: string;
     static persisted: boolean = false;
-    static tryPersist(state: string, token: string, router: Router){
+    static tryPersist(token: string, state: string, router: Router){
         if (this.persisted)
             return true;
         try {
